@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.h                                            :+:      :+:    :+:   */
+/*   utils_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:31:29 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/06 21:06:33 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/09 16:27:28 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,11 @@
 
 typedef struct s_pipex {
 	int		fd[2];
-	char	**env;
-	char	**incom;
-	char	**outcom;
+	int		n_cmds;
+	char	**env;cd ..
+	char	**cmds;
 	int		infd;
 	int		outfd;
-	char	*inpath;
-	char	*outpath;
 }				t_pipex;
 
 char	*find_path(char **envp, char	**command);
