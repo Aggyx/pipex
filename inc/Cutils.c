@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Cutils.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 16:54:11 by smagniny          #+#    #+#             */
-/*   Updated: 2023/02/28 06:45:16 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/13 18:21:29 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,5 +56,13 @@ void	doublefree(char	**tmp)
 void	panic(char	*str)
 {
 	perror(str);
-	exit(0);
+	exit(127);
+}
+
+char	**get_command(char	*argv)
+{
+	char	**comm;
+
+	comm = ft_split(argv, ' ');
+	return (comm);
 }
