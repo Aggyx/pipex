@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:31:29 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/13 15:41:24 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/23 12:39:49 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,7 @@
 # include <sys/wait.h>
 
 typedef struct s_pipex {
-	int		fd[2];
-	int		n_cmds;
 	char	**env;
-	char	**cmds;
 	int		infd;
 	int		outfd;
 }				t_pipex;

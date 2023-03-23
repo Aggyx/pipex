@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:26:22 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/13 18:25:35 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/17 15:00:42 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,6 @@ int	pipes(t_pipex *var)
 		panic("ERROR: failed new process");
 	if (pid == 0)
 		child(var);
-
 	pid2 = fork();
 	if (pid2 < 0)
 		panic("ERROR: failed new process");
