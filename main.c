@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:26:22 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/17 15:00:42 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:37:16 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ void	init(int argc, char **argv, char **envp, struct s_pipex *var)
 	if (pipe(var->fd) == -1)
 		panic("ERROR: failed building pipe");
 	var->env = envp;
-	var->incom = get_command(argv[2]);
-	var->outcom = get_command(argv[3]);
+	var->incom = ft_split(argv[2], ' ');
+	var->outcom = ft_split(argv[3], ' ');
 	var->infd = open(argv[1], O_RDONLY);
 	if (var->infd == -1)
 		panic("ERROR: Invalid input file.");

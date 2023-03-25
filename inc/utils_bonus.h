@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:31:29 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/23 12:39:49 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/25 15:35:59 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ typedef struct s_pipex {
 }				t_pipex;
 
 char	*find_path(char **envp, char	**command);
-char	**get_command(char	*argv);
 void	doublefree(char	**tmp);
 void	panic(char	*str);
 

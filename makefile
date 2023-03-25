@@ -6,7 +6,7 @@
 #    By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/06 17:44:09 by smagniny          #+#    #+#              #
-#    Updated: 2023/03/23 12:43:55 by smagniny         ###   ########.fr        #
+#    Updated: 2023/03/25 16:02:36 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,6 +37,9 @@ bonus: $(OBJ_BONUS)
 
 cleanb:
 	$(R) $(OBJ_BONUS) $(NAME)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -Iinc/utils.h -Iinc/utils_bonus.h -c $< -o $@
 
 clean:
 	$(R) $(OBJ)
