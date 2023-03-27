@@ -3,14 +3,15 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+         #
+#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/06 17:44:09 by smagniny          #+#    #+#              #
-#    Updated: 2023/03/25 16:02:36 by smagniny         ###   ########.fr        #
+#    Updated: 2023/03/25 23:11:20 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = pipex
+NAME_BONUS = pipex_bonus
 CC = gcc 
 CFLAGS = -Wall -Werror -Wextra
 
@@ -29,17 +30,22 @@ LFLAGS = ./inc/libft.a
 
 all : $(NAME)
 
+
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 bonus: $(OBJ_BONUS)
-	$(CC) $(CFLAGS) $(OBJ_BONUS) -o $(NAME)
-
+	@if [ -e $(NAME_BONUS) ]; \
+	then \
+		echo "Nothing to do for bonus"; \
+	else \
+		$(CC) $(CFLAGS) $(OBJ_BONUS) -o $(NAME_BONUS); \
+	fi
 cleanb:
-	$(R) $(OBJ_BONUS) $(NAME)
+	$(R) $(OBJ_BONUS) $(NAME_BONUS)
 
 %.o: %.c
-	$(CC) $(CFLAGS) -Iinc/utils.h -Iinc/utils_bonus.h -c $< -o $@
+	$(CC) $(CFLAGS) -Iinc/ -c $< -o $@
 
 clean:
 	$(R) $(OBJ)

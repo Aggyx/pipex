@@ -3,19 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 09:17:21 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/13 14:51:43 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/25 22:41:30 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "utils.h"
 
 /* reserva con malloc y devuelve un array de strings 
 separa s con c como delimitador */
-
 static int	ft_count_words(char const *s, char c)
 {
 	int	nb;
@@ -62,7 +60,7 @@ static char	*ft_cpy_str(int i, char const *s, char c, char **res)
 	res[i] = ft_place_word(s, c);
 	if (!res[i])
 	{
-		while (i > 0) 
+		while (i > 0)
 		{
 			i--;
 			free(res[i]);

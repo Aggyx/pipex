@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:26:22 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/25 15:42:46 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:12:16 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,36 +17,34 @@
 void	init(int argc, char **argv, char **envp, struct s_pipex *var)
 {	
 	if (argc <= 5)
-		panic("ERROR: Invalid arguments ");
+		panic("ERROR: Invalid arguments, this is bonus", -1);
 	var->env = envp;
 	var->infd = open(argv[1], O_RDONLY);
 	if (var->infd == -1)
-		panic("ERROR: Invalid input file ");
+		panic("ERROR: Invalid input file ", -1);
 	var->outfd = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0664);
 	if (var->outfd == -1)
-		panic(" ERROR: Invalid output file ");
+		panic(" ERROR: Invalid output file ", -1);
 }
 
 void	child(char **command, t_pipex *var)
 {
 	pid_t	pid;
 	int		fd[2];
-	char	*path;
+	char 	*path;
 
 	if (pipe(fd) == -1)
-		panic("Pipe error");
+		panic("Pipe error", 127);
 	path = find_path(var->env, command);
-	if (!path)
-		panic("Command not found ");
 	pid = fork();
 	if (pid < 0)
-		panic("ERROR: failed new process ");
+		panic("ERROR: failed new process ", 127);
 	if (pid == 0)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
 		if (execve(path, command, var->env) == -1)
-			panic("EXECVE error1 ");
+			panic("EXECVE error1 ", 127);
 	}
 	else
 	{
@@ -65,14 +63,14 @@ void	finalchild(char **command, t_pipex *var)
 
 	path = find_path(var->env, command);
 	if (!path)
-		panic("Command not found ");
+		panic("Command not found ", -1);
 	pid = fork();
 	if (pid < 0)
-		panic("ERROR: failed new process ");
+		panic("ERROR: failed new process ", 127);
 	if (pid == 0)
 	{
 		if (execve(path, command, var->env) == -1)
-			panic("EXECVE error2 ");
+			panic("EXECVE error2 ", 127);
 	}
 	waitpid(pid, 0, 0);
 }

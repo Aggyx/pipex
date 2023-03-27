@@ -6,7 +6,7 @@
 /*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:31:29 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/06 21:06:33 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/25 23:16:43 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <sys/wait.h>
 
 typedef struct s_pipex {
-	int		fd[2];
+	pid_t	fd[2];
 	char	**env;
 	char	**incom;
 	char	**outcom;
@@ -32,11 +32,9 @@ typedef struct s_pipex {
 
 char	*find_path(char **envp, char	**command);
 char	**get_command(char	*argv);
-void	doublefree(char	**tmp);
-void	panic(char	*str);
 
-int		ft_strncmp(const char *s1, const char *s2, size_t n);
+void	doublefree(char	**tmp);
+void	panic(char	*str, int error);
 char	**ft_split(char const *s, char c);
 char	*ft_strjoin(char const *s1, char const *s2);
-int		ft_strlen(const char *str);
 #endif

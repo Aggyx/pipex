@@ -3,14 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   Cutils.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/18 16:54:11 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/25 15:48:11 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/27 11:11:35 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "./utils.h"
+
+static	int	ft_strncmp(const char *s1, const char *s2, size_t n)
+{
+	unsigned int	i;
+
+	i = 0;
+	while ((s1[i]) && (s2[i]) && (s1[i] == s2[i]) && (i < n - 1))
+		i++;
+	if (n == 0)
+		return (0);
+	else
+		return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}
 
 static	char	**find_path_env(char **envp)
 {
@@ -33,10 +46,7 @@ char	*find_path(char **envp, char	**command)
 
 	i = 0;
 	if (access(command[0], X_OK) == 0)
-	{
-		printf("%s", command[0]);
 		return (command[0]);
-	}
 	tmp = find_path_env(envp);
 	i = -1;
 	while (tmp[++i])
@@ -68,8 +78,8 @@ void	doublefree(char	**tmp)
 	free(tmp);
 }
 
-void	panic(char	*str)
+void	panic(char	*str, int error)
 {
 	perror(str);
-	exit(127);
+	exit(error);
 }
