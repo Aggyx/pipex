@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:26:22 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/25 23:23:48 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:46:18 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,38 +23,44 @@ static	void	init(int argc, char **argv, char **envp, struct s_pipex *var)
 	var->env = envp;
 	var->incom = ft_split(argv[2], ' ');
 	var->outcom = ft_split(argv[3], ' ');
-	var->infd = open(argv[1], O_RDONLY);
-	if (var->infd == -1)
-		panic("ERROR: Invalid input file ", -1);
-	var->outfd = open(argv[4], O_TRUNC | O_CREAT | O_RDWR, 0777);
-	if (var->outfd == -1)
-		panic("ERROR: Invalid output file ", -1);
+	var->infd = argv[1];
+	var->outfd = argv[argc - 1];
 }
 
 static	void	child(t_pipex *var)
 {
+	int	fd;
+
+	fd = open(var->infd, O_RDONLY, 0644);
+	if (access(var->infd, R_OK) < 0)
+		panic("ERROR: Invalid input file ", -1);
 	if (find_path(var->env, var->incom) == NULL)
 		panic("ERROR: Command not found ", 127);
 	var->inpath = find_path(var->env, var->incom);
 	close(var->fd[0]);
 	dup2(var->fd[1], STDOUT_FILENO);
 	close(var->fd[1]);
-	dup2(var->infd, STDIN_FILENO);
-	close(var->infd);
+	dup2(fd, STDIN_FILENO);
+	close(fd);
 	if (execve(var->inpath, var->incom, var->env) == -1)
 		panic("EXECVE error ", 127);
 }
 
 static	void	finalchild(t_pipex *var)
 {
+	int	fd;
+
+	fd = open(var->outfd, O_RDWR | O_CREAT | O_TRUNC, 0644);
+	if (access(var->outfd, W_OK | R_OK) < 0)
+		panic("ERROR: Invalid input file ", -1);
 	if (find_path(var->env, var->outcom) == NULL)
 		panic("ERROR: Command not found ", 127);
 	var->outpath = find_path(var->env, var->outcom);
 	close(var->fd[1]);
 	dup2(var->fd[0], STDIN_FILENO);
 	close(var->fd[0]);
-	dup2(var->outfd, STDOUT_FILENO);
-	close(var->outfd);
+	dup2(fd, STDOUT_FILENO);
+	close(fd);
 	if (execve(var->outpath, var->outcom, var->env) == -1)
 		panic("EXECVE error ", 127);
 }
@@ -86,5 +92,5 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	var;
 
 	init(argc, argv, envp, &var);
-	return (pipes(&var));
+	pipes(&var);
 }

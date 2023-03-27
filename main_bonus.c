@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:26:22 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/27 11:12:16 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:12:22 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	child(char **command, t_pipex *var)
 {
 	pid_t	pid;
 	int		fd[2];
-	char 	*path;
+	char	*path;
 
 	if (pipe(fd) == -1)
 		panic("Pipe error", 127);

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+         #
+#    By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/06 17:44:09 by smagniny          #+#    #+#              #
-#    Updated: 2023/03/25 23:11:20 by smagniny         ###   ########.fr        #
+#    Updated: 2023/03/27 16:55:21 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,7 +30,6 @@ LFLAGS = ./inc/libft.a
 
 all : $(NAME)
 
-
 $(NAME): $(OBJ)
 	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
@@ -41,6 +40,7 @@ bonus: $(OBJ_BONUS)
 	else \
 		$(CC) $(CFLAGS) $(OBJ_BONUS) -o $(NAME_BONUS); \
 	fi
+
 cleanb:
 	$(R) $(OBJ_BONUS) $(NAME_BONUS)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:31:29 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/25 23:16:34 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/27 16:12:44 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 

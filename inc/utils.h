@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <santi.mag777@student.42madrid    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:31:29 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/25 23:16:43 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/03/27 15:44:25 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ typedef struct s_pipex {
 	char	**env;
 	char	**incom;
 	char	**outcom;
-	int		infd;
-	int		outfd;
+	char	*infd;
+	char	*outfd;
 	char	*inpath;
 	char	*outpath;
 }				t_pipex;
