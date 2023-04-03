@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:26:22 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/27 16:12:22 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:44:04 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,9 @@ void	child(char **command, t_pipex *var)
 {
 	pid_t	pid;
 	int		fd[2];
-	char	*path;
 
 	if (pipe(fd) == -1)
 		panic("Pipe error", 127);
-	path = find_path(var->env, command);
 	pid = fork();
 	if (pid < 0)
 		panic("ERROR: failed new process ", 127);
@@ -43,7 +41,9 @@ void	child(char **command, t_pipex *var)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
-		if (execve(path, command, var->env) == -1)
+		if (!command || command[0] == NULL)
+			panic("ERROR: Invalid command ", -1);
+		if (execve(find_path(var->env, command), command, var->env) == -1)
 			panic("EXECVE error1 ", 127);
 	}
 	else
@@ -59,17 +59,15 @@ void	child(char **command, t_pipex *var)
 void	finalchild(char **command, t_pipex *var)
 {
 	pid_t	pid;
-	char	*path;
-
-	path = find_path(var->env, command);
-	if (!path)
-		panic("Command not found ", -1);
+	
 	pid = fork();
 	if (pid < 0)
 		panic("ERROR: failed new process ", 127);
 	if (pid == 0)
-	{
-		if (execve(path, command, var->env) == -1)
+	{	
+		if (!command || command[0] == NULL)
+			panic("ERROR: Invalid command ", -1);
+		if (execve(find_path(var->env, command), command, var->env) == -1)
 			panic("EXECVE error2 ", 127);
 	}
 	waitpid(pid, 0, 0);

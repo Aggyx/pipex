@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:26:22 by smagniny          #+#    #+#             */
-/*   Updated: 2023/03/27 15:46:18 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/03 11:37:54 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ static	void	init(int argc, char **argv, char **envp, struct s_pipex *var)
 	var->env = envp;
 	var->incom = ft_split(argv[2], ' ');
 	var->outcom = ft_split(argv[3], ' ');
+	printf("arg1: %s\narg2: %s\n", var->incom[0], var->outcom[0]);
 	var->infd = argv[1];
 	var->outfd = argv[argc - 1];
 }
@@ -34,7 +35,9 @@ static	void	child(t_pipex *var)
 	fd = open(var->infd, O_RDONLY, 0644);
 	if (access(var->infd, R_OK) < 0)
 		panic("ERROR: Invalid input file ", -1);
-	if (find_path(var->env, var->incom) == NULL)
+	if (!var->incom || var->incom[0] == NULL)
+		panic("ERROR: Invalid command ", -1);
+	if (find_path(var->env, var->outcom) == NULL)
 		panic("ERROR: Command not found ", 127);
 	var->inpath = find_path(var->env, var->incom);
 	close(var->fd[0]);
@@ -53,6 +56,8 @@ static	void	finalchild(t_pipex *var)
 	fd = open(var->outfd, O_RDWR | O_CREAT | O_TRUNC, 0644);
 	if (access(var->outfd, W_OK | R_OK) < 0)
 		panic("ERROR: Invalid input file ", -1);
+	if (!var->outcom || var->outcom[0] == NULL)
+		panic("ERROR: Invalid command ", -1);
 	if (find_path(var->env, var->outcom) == NULL)
 		panic("ERROR: Command not found ", 127);
 	var->outpath = find_path(var->env, var->outcom);
