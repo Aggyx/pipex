@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: smagniny <smagniny@student.42madrid.com    +#+  +:+       +#+         #
+#    By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/06 17:44:09 by smagniny          #+#    #+#              #
-#    Updated: 2023/03/27 16:55:21 by smagniny         ###   ########.fr        #
+#    Updated: 2023/04/04 13:46:07 by smagniny         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 

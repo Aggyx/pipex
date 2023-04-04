@@ -6,7 +6,7 @@
 /*   By: smagniny <smagniny@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/04 07:26:22 by smagniny          #+#    #+#             */
-/*   Updated: 2023/04/03 11:44:04 by smagniny         ###   ########.fr       */
+/*   Updated: 2023/04/04 13:59:19 by smagniny         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,14 @@
 void	init(int argc, char **argv, char **envp, struct s_pipex *var)
 {	
 	if (argc <= 5)
-		panic("ERROR: Invalid arguments, this is bonus", -1);
+		panic("Pipex: Invalid arguments, this is bonus", -1);
 	var->env = envp;
 	var->infd = open(argv[1], O_RDONLY);
 	if (var->infd == -1)
-		panic("ERROR: Invalid input file ", -1);
+		panic("Pipex: Invalid input file ", -1);
 	var->outfd = open(argv[argc - 1], O_TRUNC | O_CREAT | O_RDWR, 0664);
 	if (var->outfd == -1)
-		panic(" ERROR: Invalid output file ", -1);
+		panic(" Pipex: Invalid output file ", -1);
 }
 
 void	child(char **command, t_pipex *var)
@@ -33,18 +33,18 @@ void	child(char **command, t_pipex *var)
 	int		fd[2];
 
 	if (pipe(fd) == -1)
-		panic("Pipe error", 127);
+		panic("Pipex: pipe error", 127);
 	pid = fork();
 	if (pid < 0)
-		panic("ERROR: failed new process ", 127);
+		panic("Pipex: failed new process ", 127);
 	if (pid == 0)
 	{
 		dup2(fd[1], STDOUT_FILENO);
 		close(fd[1]);
 		if (!command || command[0] == NULL)
-			panic("ERROR: Invalid command ", -1);
+			panic("Pipex: Invalid command ", -1);
 		if (execve(find_path(var->env, command), command, var->env) == -1)
-			panic("EXECVE error1 ", 127);
+			panic("Pipex: EXECVE error", 127);
 	}
 	else
 	{
@@ -59,16 +59,16 @@ void	child(char **command, t_pipex *var)
 void	finalchild(char **command, t_pipex *var)
 {
 	pid_t	pid;
-	
+
 	pid = fork();
 	if (pid < 0)
-		panic("ERROR: failed new process ", 127);
+		panic("Pipex: failed new process ", 127);
 	if (pid == 0)
 	{	
 		if (!command || command[0] == NULL)
-			panic("ERROR: Invalid command ", -1);
+			panic("Pipex: Invalid command ", -1);
 		if (execve(find_path(var->env, command), command, var->env) == -1)
-			panic("EXECVE error2 ", 127);
+			panic("Pipex: EXECVE error ", 127);
 	}
 	waitpid(pid, 0, 0);
 }
