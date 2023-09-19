@@ -6,6 +6,10 @@ Les fonctions utiles.
 + dup2 -> duplique le file descriptor 1 to 2. (permet la redirection d'entrée/sortie)
 + pipe -> création de deux fichier virtuels pour l'ecriture et lecture entre deux process.
 
+> [!NOTE]  
+> It immitates the following shell command
+> < file1 cmd1 | cmd2 > file2
+
 ## Installation
 
 ```bash
@@ -21,9 +25,6 @@ make
 1. file1 and file2 are file names.
 2. cmd1 and cmd2 are shell commands with their parameters.
 
-> [!NOTE]  
-> it immitates the following shell command;
->  < file1 cmd1 | cmd2 > file2
 ***
 ##BONUS
 >Handle multiple pipes.
